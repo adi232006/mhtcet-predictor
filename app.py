@@ -20,16 +20,22 @@ def predict_colleges(text, percentile, category):
             results.append(f"{cat} - Cutoff: {cut_percentile}%")
     return sorted(set(results)) if results else ["No matching colleges found."]
 
+from flask import abort
+
 @app.route('/', methods=['GET', 'POST'])
 def index():
     if request.method == 'POST':
-        percentile = float(request.form['percentile'])
-        category = request.form['category'].strip().upper()
-        file = request.files['pdf']
-        text = extract_text_from_pdf(file)
+        try:
+            percentile = float(request.form['percentile'])
+            category = request.form['category'].strip().upper()
+        except:
+            return abort(400)  # If input is invalid or missing
+
+        text = extract_text_from_pdf()
         colleges = predict_colleges(text, percentile, category)
         return render_template('result.html', colleges=colleges)
     return render_template('index.html')
+
 
 if __name__ == '__main__':
     import os
