@@ -4,11 +4,11 @@ import re
 
 app = Flask(__name__)
 
-def extract_text_from_pdf(file):
-    doc = fitz.open(stream=file.read(), filetype="pdf")
-    text = ""
-    for page in doc:
-        text += page.get_text()
+def extract_text_from_pdf():
+    with fitz.open("cutoff2024.pdf") as doc:
+        text = ""
+        for page in doc:
+            text += page.get_text()
     return text
 
 def predict_colleges(text, percentile, category):
