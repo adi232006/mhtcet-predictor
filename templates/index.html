@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>MHT-CET College Predictor</title>
+</head>
+<body>
+    <h2>MHT-CET College Predictor</h2>
+    <form action="/" method="post" enctype="multipart/form-data">
+        <label>Percentile:</label><br>
+        <input type="number" name="percentile" step="0.01" required><br><br>
+
+        <label>Category Code (e.g., GOBCS, GOPENH):</label><br>
+        <input type="text" name="category" required><br><br>
+
+        <label>Upload MHT CET Cutoff PDF:</label><br>
+        <input type="file" name="pdf" accept=".pdf" required><br><br>
+
+        <input type="submit" value="Predict Colleges">
+    </form>
+</body>
+</html>
